@@ -3,6 +3,7 @@ package com.example.board.controller;
 import com.example.board.dto.BoardDto;
 import com.example.board.service.BoardService;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,17 +12,23 @@ import java.util.List;
 
 @Controller
 @AllArgsConstructor
+
 public class BoardController {
     private BoardService boardService;
 
     /* 게시글 목록 */
     @GetMapping("/")
-    public String list(Model model) {
-        List<BoardDto> boardList = boardService.getBoardlist();
+    public String list(Model model, @RequestParam(value="page", defaultValue = "1") Integer pageNum) {
+        List<BoardDto> boardList = boardService.getBoardlist(pageNum);
+        Integer[] pageList = boardService.getPageList(pageNum);
 
         model.addAttribute("boardList", boardList);
+        model.addAttribute("pageList", pageList);
+
         return "board/list.html";
     }
+    /* 게시글 목록 */
+
 
 
     @GetMapping("/post")

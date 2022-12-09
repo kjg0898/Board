@@ -22,7 +22,13 @@
       <input name="keyword" type="text" placeholder="검색어를 입력해주세요">
       <button>검색</button>
     </div>
+  </form>
 
+    <div>
+    <span th:each="pageNum : ${pageList}" th:inline="text">
+        <a th:href="@{'/?page=' + ${pageNum}}">[[${pageNum}]]</a>
+    </span>
+    </div>
 
   </tr>
   </form>
@@ -37,7 +43,9 @@
   <!-- CONTENTS !-->
   <tr th:each="board : ${boardList}">
     <td>
+      <a th:href="@{'/post/' + ${board.id}}">
       <span th:text="${board.id}"></span>
+      </a>
     </td>
     <td>
       <a th:href="@{'/post/' + ${board.id}}">
@@ -45,18 +53,23 @@
       </a>
     </td>
     <td>
+      <a th:href="@{'/post/' + ${board.id}}">
       <span th:text="${board.writer}"></span>
+      </a>
     </td>
     <td>
+      <a th:href="@{'/post/' + ${board.id}}">
       <span th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
+      </a>
     </td>
   </tr>
-  </tbody>
-  <tbody>
 
 
+  <article class = "content">
+    <div>
   <a th:href="@{/post}">등록</a>
-
+    </div>
+  </article>
   </tbody>
 </table>
 
