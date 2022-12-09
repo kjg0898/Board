@@ -8,6 +8,19 @@ table, th, td {
     border: 1px solid black;
 }
 
-td, th, tr, table {
+td, th, tr, table, p, h2 {
     text-align: center;
+}
+#sform {
+    display: inline-block;
+    text-align: center;
+    width:500px;
+    margin: auto;
+}
+
+center{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

@@ -21,16 +21,10 @@ public class BoardService {
         List<BoardEntity> boardEntities = boardRepository.findAll();
         List<BoardDto> boardDtoList = new ArrayList<>();
 
-        for ( BoardEntity boardEntity : boardEntities) {
-            BoardDto boardDTO = BoardDto.builder()
-                    .id(boardEntity.getId())
-                    .title(boardEntity.getTitle())
-                    .content(boardEntity.getContent())
-                    .writer(boardEntity.getWriter())
-                    .createdDate(boardEntity.getCreatedDate())
-                    .build();
+        if (boardEntities.isEmpty()) return boardDtoList;
 
-            boardDtoList.add(boardDTO);
+        for (BoardEntity boardEntity : boardEntities) {
+            boardDtoList.add(this.convertEntityToDto(boardEntity));
         }
 
 
@@ -57,7 +51,29 @@ public class BoardService {
     public Long savePost(BoardDto boardDto) {
         return boardRepository.save(boardDto.toEntity()).getId();
     }
+    @Transactional
+    public List<BoardDto> searchPosts(String keyword) {
+        List<BoardEntity> boardEntities = boardRepository.findByTitleContaining(keyword);
+        List<BoardDto> boardDtoList = new ArrayList<>();
 
+        if (boardEntities.isEmpty()) return boardDtoList;
+
+        for (BoardEntity boardEntity : boardEntities) {
+            boardDtoList.add(this.convertEntityToDto(boardEntity));
+        }
+
+        return boardDtoList;
+    }
+
+    private BoardDto convertEntityToDto(BoardEntity boardEntity) {
+        return BoardDto.builder()
+                .id(boardEntity.getId())
+                .title(boardEntity.getTitle())
+                .content(boardEntity.getContent())
+                .writer(boardEntity.getWriter())
+                .createdDate(boardEntity.getCreatedDate())
+                .build();
+    }
     @Transactional
     public void deletePost(Long id) {
         boardRepository.deleteById(id);

@@ -10,10 +10,22 @@
 <!-- HEADER -->
 <div th:insert="common/header.html" id="header"></div>
 
+<!-- 검색 form -->
 
 
 <table>
+
   <thead>
+  <tr>
+  <form action="/board/search" method="GET">
+    <div>
+      <input name="keyword" type="text" placeholder="검색어를 입력해주세요">
+      <button>검색</button>
+    </div>
+
+
+  </tr>
+  </form>
     <tr>
       <th class="one wide">번호</th>
       <th class="ten wide">글제목</th>
