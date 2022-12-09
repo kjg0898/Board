@@ -34,7 +34,6 @@ public class BoardEntity extends TimeEntity {
         this.content = content;
     }
 }
-
 /*import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 

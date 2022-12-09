@@ -1,11 +1,15 @@
 package com.example.board.dto;
 
 import com.example.board.domain.entity.BoardEntity;
-import com.example.board.domain.entity.TimeEntity;
-import lombok.Builder;
+
+import lombok.*;
 
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
 public class BoardDto {
     private Long id;
     private String writer;
